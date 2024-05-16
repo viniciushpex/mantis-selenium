@@ -17,10 +17,11 @@ import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 public class NewTaskTest {
+
     public WebDriver navegador;
+
     @Before
     public void setUp(){
         // Abrir navegador (setar o diretório onde se encontra o webdriver)
@@ -60,6 +61,7 @@ public class NewTaskTest {
         WebElement userInfo = navegador.findElement(By.xpath("//span[@class='user-info']"));
         assertEquals(username,userInfo.getText());
     }
+
     @Test
     public void createBug(){
         //Clicar no botão Criar Tarefa
@@ -129,6 +131,7 @@ public class NewTaskTest {
         navegador.findElement(By.xpath("//input[@value='Criar Nova Tarefa']")).click();
 
     }
+
     @Test
     public void validateBug(){
         //Clicar em ver tarefas
@@ -197,10 +200,9 @@ public class NewTaskTest {
         //assertEquals("12",bugOSVersion.getText());
     }
 
-
-    //@After
-    //public void shutDown(){
+    @After
+    public void shutDown(){
         //Fechar navegador
-        //navegador.quit();
-    //}
+        navegador.quit();
+    }
 }

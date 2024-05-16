@@ -16,6 +16,7 @@ public class LoginTest {
     public WebDriver navegador;
     @Before
     public void setUp(){
+
         // Abrir navegador (setar o diretório onde se encontra o webdriver)
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\vinic\\Documents\\Projects\\Browser\\chromedriver.exe");
         navegador = new ChromeDriver();
@@ -23,7 +24,6 @@ public class LoginTest {
 
         // Entrar no Mantis
         navegador.get("https://mantis-prova.base2.com.br/login_page.php");
-
     }
 
     @Test
@@ -56,8 +56,6 @@ public class LoginTest {
         //Verificar se o usuário está logado
         WebElement userInfo = navegador.findElement(By.xpath("//span[@class='user-info']"));
         assertEquals(username,userInfo.getText());
-
-
     }
 
     @Test
@@ -89,7 +87,6 @@ public class LoginTest {
 
         //Verificar se foi exibida mensagem de erro de login
         WebElement erroLogin = navegador.findElement(By.xpath("//p[contains(text(),'Sua conta pode estar desativada ou bloqueada ou o nome de usuário e a senha que você digitou não estão corretos.')]"));
-
     }
 
     @Test
