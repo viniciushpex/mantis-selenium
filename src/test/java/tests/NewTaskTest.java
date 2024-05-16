@@ -2,7 +2,9 @@ package tests;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TestName;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,6 +12,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import support.Generator;
+import support.Screenshot;
 
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
@@ -19,6 +23,9 @@ import static org.junit.Assert.assertEquals;
 public class NewTaskTest {
 
     public WebDriver driver;
+
+    @Rule
+    public TestName test = new TestName();
 
     @Before
     public void setUp(){
@@ -124,8 +131,12 @@ public class NewTaskTest {
         WebElement chkVisibility = driver.findElement(By.xpath("//span[normalize-space()='privado']"));
         chkVisibility.click();
 
+        //Tirar Screenshot (selecionar diretório a ser enviada a screenshot)
+        String screenshotFile = "C:\\Users\\vinic\\Documents\\Projects\\test-report\\" + Generator.dateTimeForFile() + test.getMethodName() + ".png";
+        Screenshot.take(driver, screenshotFile);
+
         //Clicar em Criar Nova Tarefa
-        driver.findElement(By.xpath("//input[@value='Criar Nova Tarefa']")).click();
+        //driver.findElement(By.xpath("//input[@value='Criar Nova Tarefa']")).click();
 
     }
 
@@ -143,6 +154,10 @@ public class NewTaskTest {
         WebElement detailsBug = driver.findElement(By.xpath("//h4[normalize-space()='Ver Detalhes da Tarefa']"));
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOf(detailsBug));
+
+        //Tirar Screenshot (selecionar diretório a ser enviada a screenshot)
+        String screenshotFile = "C:\\Users\\vinic\\Documents\\Projects\\test-report\\" + Generator.dateTimeForFile() + test.getMethodName() + ".png";
+        Screenshot.take(driver, screenshotFile);
 
         //Validar se campo relator está como Vinicius_Pereira
         WebElement bugReporter = driver.findElement(By.xpath("//td[@class='bug-reporter']/a"));

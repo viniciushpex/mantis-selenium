@@ -2,11 +2,15 @@ package tests;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TestName;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import support.Generator;
+import support.Screenshot;
 
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
@@ -15,6 +19,10 @@ import static org.junit.Assert.assertEquals;
 
 public class LoginTest {
     public WebDriver driver;
+
+    @Rule
+    public TestName test = new TestName();
+
     @Before
     public void setUp(){
 
@@ -25,6 +33,7 @@ public class LoginTest {
 
         // Entrar no Mantis
         driver.get("https://mantis-prova.base2.com.br/login_page.php");
+        driver.manage().window().maximize();
     }
 
     @Test
@@ -57,6 +66,10 @@ public class LoginTest {
         //Verificar se o usuário está logado
         WebElement userInfo = driver.findElement(By.xpath("//span[@class='user-info']"));
         assertEquals(username,userInfo.getText());
+
+        //Tirar Screenshot (selecionar diretório a ser enviada a screenshot)
+        String screenshotFile = "C:\\Users\\vinic\\Documents\\Projects\\test-report\\" + Generator.dateTimeForFile() + test.getMethodName() + ".png";
+        Screenshot.take(driver, screenshotFile);
     }
 
     @Test
@@ -88,6 +101,10 @@ public class LoginTest {
 
         //Verificar se foi exibida mensagem de erro de login
         WebElement errorLogin = driver.findElement(By.xpath("//p[contains(text(),'Sua conta pode estar desativada ou bloqueada ou o nome de usuário e a senha que você digitou não estão corretos.')]"));
+
+        //Tirar Screenshot (selecionar diretório a ser enviada a screenshot)
+        String screenshotFile = "C:\\Users\\vinic\\Documents\\Projects\\test-report\\" + Generator.dateTimeForFile() + test.getMethodName() + ".png";
+        Screenshot.take(driver, screenshotFile);
     }
 
     @Test
@@ -119,6 +136,10 @@ public class LoginTest {
 
         //Verificar se foi exibida mensagem de erro de login
         driver.findElement(By.xpath("//p[contains(text(),'Sua conta pode estar desativada ou bloqueada ou o nome de usuário e a senha que você digitou não estão corretos.')]"));
+
+        //Tirar Screenshot (selecionar diretório a ser enviada a screenshot)
+        String screenshotFile = "C:\\Users\\vinic\\Documents\\Projects\\test-report\\" + Generator.dateTimeForFile() + test.getMethodName() + ".png";
+        Screenshot.take(driver, screenshotFile);
     }
 
     @After
